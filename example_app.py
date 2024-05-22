@@ -21,7 +21,7 @@ def predict_difficulty(sentence):
     levels = {0: "A1", 1: "A2", 2: "B1", 3: "B2", 4: "C1", 5: "C2"}
     return levels.get(difficulty_index, "Unknown")
 
-# Custom background set-up
+# Custom background set-up with enhanced readability
 def set_background(image_url):
     st.markdown(
         f"""
@@ -30,6 +30,12 @@ def set_background(image_url):
             background-image: url({image_url});
             background-size: cover;
             background-position: center;
+            color: #ffffff;  /* Sets the text color to white */
+            text-shadow: 2px 2px 5px black;  /* Adds shadow to text for better readability */
+        }}
+        .css-2trqyj {{
+            padding: 5px;  /* More padding around text input fields */
+            background-color: rgba(255, 255, 255, 0.8);  /* Slightly transparent background for inputs */
         }}
         </style>
         """,
@@ -44,11 +50,10 @@ st.title('French Sentence Difficulty Classifier')
 sentence = st.text_input("Enter a sentence in French:")
 
 if sentence:
-    options = ["A1", "A2", "B1", "B2", "C1", "C2"]
-    user_choice = st.selectbox("Choose the expected difficulty level:", options)
+    options = ["Select a difficulty level", "A1", "A2", "B1", "B2", "C1", "C2"]
+    user_choice = st.selectbox("Choose the expected difficulty level:", options, index=0)
 
-    # Only predict and display results after the user has made their choice
-    if user_choice:
+    if user_choice != "Select a difficulty level":
         difficulty = predict_difficulty(sentence)
         if user_choice == difficulty:
             st.success("Well done! You have a good intuition!")
