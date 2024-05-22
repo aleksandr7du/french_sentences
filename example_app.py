@@ -47,7 +47,7 @@ def set_background(image_url):
     )
 
 # Set the background to a Paris view
-set_background("https://png.pngtree.com/thumb_back/fw800/background/20240329/pngtree-the-eiffel-tower-in-paris-france-image_15665174.jpg")
+set_background("https://github.com/aleksandr7du/french_sentences/blob/main/background_streamlit_french_sentences.jpg")
 
 # Set up the Streamlit interface
 st.title('French Sentence Difficulty Classifier')
