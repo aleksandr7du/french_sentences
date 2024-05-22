@@ -1,15 +1,11 @@
 import streamlit as st
 from transformers import CamembertTokenizer, CamembertForSequenceClassification
 import torch
-import pandas as pd
 
 # Load the model and tokenizer
 MODEL = "camembert-base"
 tokenizer = CamembertTokenizer.from_pretrained(MODEL)
 model = CamembertForSequenceClassification.from_pretrained(MODEL, num_labels=6)
-
-# Load the criteria data
-criteria_df = pd.read_csv('https://github.com/aleksandr7du/french_sentences/blob/main/Combined_Indicators_by_Difficulty.csv')
 
 def predict_difficulty(sentence):
     # Tokenize the text
@@ -45,16 +41,16 @@ set_background("https://all.accor.com/magazine/imagerie/1-c4c1.jpg")
 
 # Set up the Streamlit interface
 st.title('French Sentence Difficulty Classifier')
-sentence = st.text_input("Enter a sentence in French:", "")
+sentence = st.text_input("Enter a sentence in French:")
 
 if sentence:
     difficulty = predict_difficulty(sentence)
-    st.write(f"The difficulty level of the sentence is: {difficulty}")
+    options = ["A1", "A2", "B1", "B2", "C1", "C2"]
+    user_choice = st.selectbox("Choose the expected difficulty level:", options)
+    st.write(f"Predicted difficulty level of the sentence: {difficulty}")
 
-    # Optional: Display matching criteria info for educational purposes
-    criteria = criteria_df[criteria_df['difficulty'] == difficulty].iloc[0]
-    st.write("Criteria based on difficulty:")
-    st.write(f"Sentence Length: {criteria['sentence_length']:.2f} characters")
-    st.write(f"Word Count: {criteria['word_count']:.2f}")
-    st.write(f"Apostrophe Count: {criteria['apostrophe_count']:.2f}")
-    st.write(f"Punctuation Count: {criteria['punctuation_count']:.2f}")
+    # Check if user's choice matches the prediction
+    if user_choice == difficulty:
+        st.success("Well done! You have a good intuition!")
+    else:
+        st.error("Pas de soucis: mistakes are part of success!")
