@@ -44,13 +44,14 @@ st.title('French Sentence Difficulty Classifier')
 sentence = st.text_input("Enter a sentence in French:")
 
 if sentence:
-    difficulty = predict_difficulty(sentence)
     options = ["A1", "A2", "B1", "B2", "C1", "C2"]
     user_choice = st.selectbox("Choose the expected difficulty level:", options)
-    st.write(f"Predicted difficulty level of the sentence: {difficulty}")
 
-    # Check if user's choice matches the prediction
-    if user_choice == difficulty:
-        st.success("Well done! You have a good intuition!")
-    else:
-        st.error("Pas de soucis: mistakes are part of success!")
+    # Only predict and display results after the user has made their choice
+    if user_choice:
+        difficulty = predict_difficulty(sentence)
+        if user_choice == difficulty:
+            st.success("Well done! You have a good intuition!")
+        else:
+            st.error("Pas de soucis: mistakes are part of success!")
+        st.write(f"Predicted difficulty level of the sentence: {difficulty}")
