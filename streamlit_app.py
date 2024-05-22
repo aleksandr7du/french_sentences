@@ -1,9 +1,29 @@
 import streamlit as st
-import torch
-import requests
-from transformers import CamembertTokenizer, CamembertModel
-import torch.nn as nn
 import os
+
+# Check if required packages are installed and install if not
+def install(package):
+    os.system(f"pip install {package}")
+
+try:
+    import torch
+except ImportError:
+    install('torch')
+    import torch
+
+try:
+    import requests
+except ImportError:
+    install('requests')
+    import requests
+
+try:
+    from transformers import CamembertTokenizer, CamembertModel
+except ImportError:
+    install('transformers')
+    from transformers import CamembertTokenizer, CamembertModel
+
+import torch.nn as nn
 
 # Define the model architecture
 class Net(nn.Module):
