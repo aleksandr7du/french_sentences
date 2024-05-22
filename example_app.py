@@ -30,12 +30,16 @@ def set_background(image_url):
             background-image: url({image_url});
             background-size: cover;
             background-position: center;
-            color: #ffffff;  /* Sets the text color to white */
-            text-shadow: 2px 2px 5px black;  /* Adds shadow to text for better readability */
+            color: #000000;  /* Sets the text color to black */
         }}
         .css-2trqyj {{
             padding: 5px;  /* More padding around text input fields */
             background-color: rgba(255, 255, 255, 0.8);  /* Slightly transparent background for inputs */
+            border: 1px solid #f5f5dc;  /* Beige border around the input field */
+        }}
+        .css-2trqyj textarea {{
+            background-color: #ffffff;  /* White background for the textarea */
+            border: 1px solid #f5f5dc;  /* Beige border for the textarea */
         }}
         </style>
         """,
@@ -43,7 +47,7 @@ def set_background(image_url):
     )
 
 # Set the background to a Paris view
-set_background("https://all.accor.com/magazine/imagerie/1-c4c1.jpg")
+set_background("https://png.pngtree.com/thumb_back/fw800/background/20240329/pngtree-the-eiffel-tower-in-paris-france-image_15665174.jpg")
 
 # Set up the Streamlit interface
 st.title('French Sentence Difficulty Classifier')
@@ -55,8 +59,16 @@ if sentence:
 
     if user_choice != "Select a difficulty level":
         difficulty = predict_difficulty(sentence)
+        st.write(f"Predicted difficulty level of the sentence: {difficulty}")
+
         if user_choice == difficulty:
             st.success("Well done! You have a good intuition!")
         else:
             st.error("Pas de soucis: mistakes are part of success!")
-        st.write(f"Predicted difficulty level of the sentence: {difficulty}")
+
+# Newsletter subscription
+st.write("If you like the app, subscribe to our newsletter!")
+email = st.text_input("Enter your email:")
+if st.button("Subscribe"):
+    st.write("Thank you for subscribing!")
+    st.button("Subscribe", disabled=True)
