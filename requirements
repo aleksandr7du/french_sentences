@@ -1,6 +1,6 @@
-import streamlit as st
-import torch
-import requests
+streamlit as st
+torch
+requests
 from transformers import CamembertTokenizer, CamembertModel
-import torch.nn as nn
-import os
+torch.nn as nn
+os
