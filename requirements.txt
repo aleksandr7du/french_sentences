@@ -3,3 +3,4 @@ torch
 transformers[sentencepiece,tokenizers]
 requests
 sentencepiece
+tokenizers
