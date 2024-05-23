@@ -4,3 +4,6 @@ transformers[sentencepiece,tokenizers]
 requests
 sentencepiece
 tokenizers
+joblib 
+scikit-learn 
+pandas
